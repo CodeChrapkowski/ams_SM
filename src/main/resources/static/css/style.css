@@ -1,0 +1,52 @@
+.menu
+{
+max-width: 1400px;
+align: center;
+
+
+}
+
+.profile-panel header
+ {
+   text-align: center;
+ }
+
+.profile-panel footer
+ {
+   text-align: right;
+   color: blue;
+ }
+
+ .wyszk-zad-dane
+ {
+   margin:  auto;
+   justify: center;
+   color: red;
+   max-width: 1200px;
+ }
+
+.wyszk-zad-form
+{
+  margin:  auto;
+  justify: center;
+  align: center;
+  max-width: 1200px;
+}
+
+.adm-sekcje-lista
+{
+  margin:  auto;
+  max-width: 800px;
+}
+
+.adm-taryfy-lista
+{
+  margin:  auto;
+  max-width: 800px;
+}
+
+.adm-taryfy-form
+{
+  margin:  auto;
+  max-width: 800px;
+}

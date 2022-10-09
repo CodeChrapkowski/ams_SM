@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="layout/head"></div>
+</head>
+
+<div th:replace="layout/menumoduly"></div>
+
+<h1>Administracja</h1><br>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/} ">Start</a></li>
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/administracja/administracja} ">Administracja</a></li>
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/administracja/cenniki} ">Cenniki</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edytuj Cennik</li>
+    </ol>
+</nav>
+
+<h2>Dodaj Cennik</h2><br>
+
+
+<form action="#" th:action="@{/zapiszCennik}" th:object="${cenniki}" method="POST">
+    <input type="hidden" th:field="*{idcennik}" class=" form-control mb-4 col-4">
+    <input type="text" th:field="*{nazwa}" placeholder="Nazwa" class=" form-control mb-4 col-4">
+    <input type="text" th:field="*{opis}" placeholder="Opis" class=" form-control mb-4 col-4">
+    <input type="text" th:field="*{cena}" placeholder="Cena" class=" form-control mb-4 col-4">
+    <div class="input-group mb-4 col-4">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Wybierz Taryfe</label>
+        </div>
+        <select th:field="*{taryfy_idtaryfa}"  class="custom-select" id="inputGroupSelect01">
+            <option  th:each="taryfy: ${listaTaryf}"
+                     th:value="${taryfy.idtaryfa}"
+                     th:text="${taryfy.nazwa}"/>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-info col-2">Edytuj Cennik</button>
+</form>
+
+
+</div>
+
+
+</html>

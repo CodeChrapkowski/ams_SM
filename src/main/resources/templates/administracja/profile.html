@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="layout/head"></div>
+</head>
+
+<div th:replace="layout/menumoduly"></div>
+
+
+    <section class="profile-panel">
+        <div class="container">
+
+            <header>
+                <h3>Profil klientaa</h3>
+            </header>
+
+            <br>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            DANE OSOBOWE
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0 ">
+
+                                <label>imię:</label> <span sec:authentication="principal.username">imie</span><br>
+                                <label>nazwisko:</label><br>
+                                <label>PESEL:</label><br>
+                                <label>data urodzenia:</label><br>
+                                <label>miejsce urodzenia:</label><br>
+
+                                <footer class="blockquote-footer ">Zgłoś zmianę
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            DANE KONTAKTOWE
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <label>e-mail:</label> <span sec:authentication="principal.username">imie</span><br>
+                                <label>nr telefonu:</label><br>
+                                <label>preferowana forma kontaktu:</label><br>
+                                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source
+                                    Title</cite>
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            HASŁO
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a
+                                    ante.</p>
+                                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source
+                                    Title</cite>
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            DANE
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a
+                                    ante.</p>
+                                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source
+                                    Title</cite>
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    </body>
+</section>
+</html>

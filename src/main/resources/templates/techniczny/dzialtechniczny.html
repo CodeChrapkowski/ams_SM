@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="layout/head"></div>
+</head>
+
+<body>
+<div th:replace="layout/menumoduly"></div>
+<div class="container">
+
+
+</div>
+<h1>Dział Techniczny</h1>
+<br>
+<div class="row">
+
+    <div class="card text-dark bg-warning mb-3" style="max-width: 15rem;">
+        <div class="card-header">Statki powietrzne</div>
+        <div class="card-body">
+            <h5 class="card-title">Warning card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a class="btn btn-outline-dark" sec:authorize="isAuthenticated()" th:href="@{/administracja/cenniki}"
+               role="button">Wejdź</a>
+        </div>
+    </div>
+
+    <div class="card text-dark bg-light mb-3" style="max-width: 15rem;">
+        <div class="card-header">Typy statkow</div>
+        <div class="card-body">
+            <h5 class="card-title">Light card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a class="btn btn-outline-dark" sec:authorize="isAuthenticated()" th:href="@{/administracja/cenniki}"
+               role="button">Wejdź</a>
+        </div>
+    </div>
+
+    <div class="card text-dark bg-warning mb-3" style="max-width: 15rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+            <h5 class="card-title">Warning card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+           aria-controls="nav-home" aria-selected="true">Statki powietrzne</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+           aria-controls="nav-profile" aria-selected="false">Typy statków</a>
+        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+           aria-controls="nav-contact" aria-selected="false">Contact</a>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div>
+            <a class="btn btn-success" th:href="@{/showNewStatekPowietrznyForm}" role="button">Dodaj</a>
+        </div>
+
+        <div>
+            <h1 align="center"> Lista statków powietrznych</h1>
+        </div>
+
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nazwa</th>
+                    <th scope="col">Opis</th>
+                    <th scope="col">Rejestracja</th>
+                    <th scope="col">Znaki</th>
+                    <th scope="col">Data dodania</th>
+                    <th scope="col">Id typu statku</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nazwa typu statku</th>
+                    <th scope="col">Akcje</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="statki_powietrzne : ${listaStatkowPowietrznych}">
+                    <td th:text="${statki_powietrzne.id_statek_powietrzny}">ID</td>
+                    <td th:text="${statki_powietrzne.nazwa}">Nazwa</td>
+                    <td th:text="${statki_powietrzne.opis}">Opis</td>
+                    <td th:text="${statki_powietrzne.rejestracja}">Rejestracja</td>
+                    <td th:text="${statki_powietrzne.znaki}">Znaki</td>
+                    <td th:text="${statki_powietrzne.data_dodania}">Data_dodania</td>
+                    <td th:text="${statki_powietrzne.typy_statkow_idtypstatku}">Id typ statku</td>
+                    <td th:text="${statki_powietrzne.typyStatkow.idtypstatku}">Nazwa</td>
+                    <td th:text="${statki_powietrzne.typyStatkow.nazwa}">Nazwa</td>
+                    <!--  <td> <a th:href="@{/showFormForUpdate/{id}(id=${statkiPowietrzne.})}"><i class="fas fa-edit"></i></a></td>-->
+                    <!--   // podanie nazwy tabeli i id z tabeli-->
+                    <td><a th:href="@{/showFormForUpdate/{id}(id=${statki_powietrzne.id_statek_powietrzny})}"><i
+                            class="fas fa-edit"></i></a>
+                        <a th:href="@{/deleteStatkiPowietrzne/{id}(id=${statki_powietrzne.id_statek_powietrzny})}"><i
+                                class="fas fa-trash-alt"></i></a></td>
+
+
+                </tr>
+                </tbody>
+            </table>
+
+
+            <select >
+                <option th:each="statki_powietrzne: ${listaStatkowPowietrznych}"
+                        th:value="${statki_powietrzne.id_statek_powietrzny}"
+                        th:text="${statki_powietrzne.znaki}"/>
+            </select>
+
+        </div>
+    </div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+</div>
+</body>
+</html>

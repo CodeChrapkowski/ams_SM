@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="layout/head"></div>
+</head>
+
+<div th:replace="layout/menumoduly"></div>
+
+<h1>Administracja</h1><br>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/} ">Start</a></li>
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/administracja/administracja} ">Administracja</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Taryfy</li>
+    </ol>
+</nav>
+
+<div class="adm-taryfy-lista" align="center">
+
+    <h2>Taryfy</h2><br>
+
+    <div>
+        <a class="btn btn-success" th:href="@{/ZobaczNoweTaryfyForm}" role="button">Dodaj</a>
+    </div>
+
+    <!--Filtrowanie tabeli-->
+
+    <form th:href="@{/administracja/taryfy}" method="get">
+        <input id="txtSearch" type="text" name="keyword">
+        <button type="submit">Wyszukaj</button>
+    </form>
+
+    <div>
+        <h1 align="center"> Lista wszytskich taryf</h1>
+    </div>
+
+    <div>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">
+                    <a th:href="@{'/administracja/taryfy/page/' + ${currentPage} + '?sortField=nazwa&sortDirection=' + ${reverseSortDirection}}">Nazwa</a>
+                </th>
+                <th scope="col">
+                    <a th:href="@{'/administracja/taryfy/page/' + ${currentPage} + '?sortField=opis&sortDirection=' + ${reverseSortDirection}}">Opis</a>
+                </th>
+                <th scope="col">Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="taryfy : ${listaTaryf}">
+                <td th:text="${taryfy.idtaryfa}">ID</td>
+                <td th:text="${taryfy.nazwa}">Nazwa</td>
+                <td th:text="${taryfy.opis}">Opis</td>
+                <td><a th:href="@{/pokazFormTaryfaAktualizacja/{id}(id=${taryfy.idtaryfa})}"><i
+                        class="fas fa-edit"></i></a>
+                    <a th:href="@{/usunTaryfe/{id}(id=${taryfy.idtaryfa})}"><i
+                            class="fas fa-trash-alt"></i></a></td>
+
+
+            </tr>
+            </tbody>
+        </table>
+
+
+        <div th:if="${totalPages > 1}">
+            <div class="row col-sm-10">
+                <div class="col-sm-2">
+                    Total Rows: [[${totalItems}]]
+                </div>
+                <div class="col-sm-2">
+                <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                    <a th:if="${currentPage != i}"
+                       th:href="@{'/administracja/taryfy/page/' + ${i} + '?sortField='+ ${sortField} + '&sortDirection=' + ${sortDirection}}">[[${i}]]</a>
+                    <span th:unless="${currentPage !=i}">[[${i}]]</span> &nbsp;&nbsp;
+                </span>
+                </div>
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}"
+                       th:href="@{'/administracja/taryfy/page/' +${currentPage + 1} + '?sortField='+ ${sortField} + '&sortDirection=' + ${sortDirection}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}">Next</span>
+                </div>
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}"
+                       th:href="@{'/administracja/taryfy/page/' +${totalPages} + '?sortField='+ ${sortField} + '&sortDirection=' + ${sortDirection}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}">Last</span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+</html>

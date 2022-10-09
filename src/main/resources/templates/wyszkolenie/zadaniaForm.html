@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="layout/head"></div>
+</head>
+
+<div th:replace="layout/menumoduly"></div>
+
+
+<h1>Wyszkolenie</h1><br>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/} ">Start</a></li>
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/wyszkolenie/wyszkolenie} ">Wyszkolenie</a>
+        </li>
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()"
+                                       th:href="@{/wyszkolenie/zadania} ">Zadania</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Dodaj Zadanie</li>
+    </ol>
+</nav>
+
+
+<div class="wyszk-zad-form " align="center">
+    <div>
+        <h2> Dodaj Zadanie</h2> <br>
+    </div>
+
+
+    <form action="#" th:action="@{/zadaniaForm}" th:object="${zadania}" method="POST">
+
+
+        <input type="text" th:field="*{zadanie}" placeholder="Zadanie" th:errorClass="error"
+               class=" form-control mb-4 col-4">
+        <p th:if="${#fields.hasErrors('cwiczenie')}" th:errors="*{cwiczenie}"></p>
+
+        <input type="text" th:field="*{cwiczenie}" placeholder="Ćwiczenie" class=" form-control mb-4 col-4">
+        <p th:if="${#fields.hasErrors('cwiczenie')}" th:errors="*{cwiczenie}"></p>
+
+        <input type="text" th:field="*{opis}" placeholder="Opis" class=" form-control mb-4 col-4">
+        <p th:if="${#fields.hasErrors('opis')}" th:errors="*{opis}"></p>
+
+        <input type="text" th:field="*{opis2}" placeholder="Opis2" class=" form-control mb-4 col-4">
+        <p th:if="${#fields.hasErrors('opis2')}" th:errors="*{opis2}"></p>
+
+        <button type="submit" class="btn btn-info col-2">Dodaj Zadanie</button>
+    </form>
+
+
+</div>
+</div>
+
+
+</html>

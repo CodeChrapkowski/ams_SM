@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="layout/head"></div>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="row">
+            <div class="col-8">
+                <ul class="nav">
+                    <li class="nav-item">
+
+                        <a class="nav-link active" sec:authorize="isAuthenticated()" th:href="@{/account/client/index}">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+
+                    <a class="nav-link active" sec:authorize="isAuthenticated()" th:href="@{/account/client/briefing}">
+                        <i class="far fa-list-alt"></i>
+                        Odprawa</a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" sec:authorize="isAuthenticated()"
+                           th:href="@{/account/client/echrono}">
+                            <i class="fas fa-history"></i>
+                            eChrono</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" sec:authorize="isAuthenticated()"
+                           th:href="@{/account/client/dzialtechniczny}">
+                            <i class="fas fa-tools"></i>
+                            Dział Techniczny</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" sec:authorize="isAuthenticated()"
+                           th:href="@{/account/client/platnosci}">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            Płatności</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-4">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="fas fa-user-alt"></i>
+                            <span sec:authentication="principal.username">imie</span></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" sec:authorize="isAuthenticated()"
+                               th:href="@{/account/client/profile}">
+                                <i class="fas fa-id-card"></i>
+                                Mój profil</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/logout}">
+                                <i class="fas fa-power-off"></i>
+                                Logout</a>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </header>
+
+</div>
+<h1>Dział Techniczny</h1>
+<br>
+
+</div>
+<h2>Edycja Statek powietrzny</h2>
+<br>
+
+<form action="#" th:action="@{/saveStatkiPowietrzne}" th:object ="${statkiPowietrzne}" method="POST">
+
+    <input type="hidden" th:field="*{id_statek_powietrzny}" class=" form-control mb-4 col-4">
+    <input type="text" th:field="*{nazwa}" class=" form-control mb-4 col-4">
+    <input type="text" th:field="*{opis}"  class=" form-control mb-4 col-4">
+    <input type="text" th:field="*{rejestracja}"  class=" form-control mb-4 col-4">
+    <input type="text" th:field="*{znaki}" placeholder="Znaki" class=" form-control mb-4 col-4">
+    <input type="text" th:field="*{data_dodania}"  class=" form-control mb-4 col-4">
+<!--    <input type="text" th:field="*{typy_statkow_idtypstatku}"  class=" form-control mb-4 col-4">-->
+
+
+    <div class="input-group mb-4 col-4">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Typ statku</label>
+        </div>
+        <select th:field="*{typy_statkow_idtypstatku}"  class="custom-select" id="inputGroupSelect01">
+            <option  th:each="typy_statkow: ${listaTypowStatkow}"
+                     th:value="${typy_statkow.idtypstatku}"
+                     th:text="${typy_statkow.nazwa}"/>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-info col-2">Aktualizuj Statek</button>
+</form>
+</body>
+</html>

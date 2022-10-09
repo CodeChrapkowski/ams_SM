@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <div th:replace="layout/head"></div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+            integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+            crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+<div th:replace="layout/menumoduly"></div>
+
+<h1>Administracja</h1><br>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/} ">Start</a></li>
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/administracja/administracja} ">Administracja</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Sekcje</li>
+    </ol>
+</nav>
+
+<h2>Sekcje</h2><br>
+
+<div>
+    <a class="btn btn-success" th:href="@{/zobaczSekcjeNoweForm}" role="button">Dodaj</a>
+</div>
+
+<!--Filtrowanie tabeli-->
+
+
+<input id="txtSearch" type="text" name="keyword">
+
+
+<div class="adm-sekcje-lista" align="center">
+
+    <div>
+        <h1 align="center"> Lista sekcji</h1><br>
+    </div>
+
+    <div>
+        <div th:switch="${listSekcje}">
+            <h2 th:case="null">No users yet!</h2>
+            <div th:case="*">
+                <table id="sekcjeTable" class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">
+                            <a th:href="@{'/administracja/taryfy/page/' + ${currentPage} + '?sortField=nazwa&sortDirection=' + ${reverseSortDirection}}">Nazwa</a>
+                        </th>
+
+                        <th scope="col">Akcje</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="sekcje : ${listSekcje}">
+                        <td th:text="${sekcje.idsekcja}">ID</td>
+                        <td th:text="${sekcje.nazwa}">Nazwa</td>
+                        <td><a th:href="@{/pokazFormTaryfaAktualizacja/{id}(id=${sekcje.idsekcja})}"><i
+                                class="fas fa-edit"></i></a>
+                            <a th:href="@{/usunTaryfe/{id}(id=${sekcje.idsekcja})}"><i
+                                    class="fas fa-trash-alt"></i></a></td>
+
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div th:if="${totalPages > 1}">
+            <div class="row col-sm-10">
+                <div class="col-sm-2">
+                    Total Rows: [[${totalItems}]]
+                </div>
+                <div class="col-sm-2">
+                <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                    <a th:if="${currentPage != i}"
+                       th:href="@{'/administracja/taryfy/page/' + ${i} + '?sortField='+ ${sortField} + '&sortDirection=' + ${sortDirection}}">[[${i}]]</a>
+                    <span th:unless="${currentPage !=i}">[[${i}]]</span> &nbsp;&nbsp;
+                </span>
+                </div>
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}"
+                       th:href="@{'/administracja/taryfy/page/' +${currentPage + 1} + '?sortField='+ ${sortField} + '&sortDirection=' + ${sortDirection}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}">Next</span>
+                </div>
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}"
+                       th:href="@{'/administracja/taryfy/page/' +${totalPages} + '?sortField='+ ${sortField} + '&sortDirection=' + ${sortDirection}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}">Last</span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="layout/head"></div>
+</head>
+
+<div th:replace="layout/menumoduly"></div>
+
+<h1>Administracja</h1>
+
+<nav aria-label="breadcrumb" >
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/} ">Start</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Administracja</li>
+    </ol>
+</nav>
+
+<div class="row">
+
+    <div class="card text-dark bg-warning mb-3" style="max-width: 15rem;">
+        <div class="card-header">Cenniki</div>
+        <div class="card-body">
+            <h5 class="card-title">Warning card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+            <a class="btn btn-outline-dark" sec:authorize="isAuthenticated()" th:href="@{/administracja/cenniki}"
+               role="button">Wejdź</a>
+        </div>
+    </div>
+
+    <div class="card text-dark bg-light mb-3" style="max-width: 15rem;">
+        <div class="card-header">Taryfy</div>
+        <div class="card-body">
+            <h5 class="card-title">Light card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+            <a class="btn btn-outline-dark" sec:authorize="isAuthenticated()" th:href="@{/administracja/taryfy}"
+               role="button">Wejdź</a>
+        </div>
+    </div>
+
+    <div class="card text-dark bg-warning mb-3" style="max-width: 15rem;">
+        <div class="card-header">Pracownicy</div>
+        <div class="card-body">
+            <h5 class="card-title">Warning card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+            <a class="btn btn-outline-dark" sec:authorize="isAuthenticated()" th:href="@{/administracja/pracownicy}"
+               role="button">Wejdź</a>
+        </div>
+    </div>
+
+    <div class="card text-dark bg-light mb-3" style="max-width: 15rem;">
+        <div class="card-header">Piloci</div>
+        <div class="card-body">
+            <h5 class="card-title">Light card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+            <a class="btn btn-outline-dark" sec:authorize="isAuthenticated()" th:href="@{/administracja/piloci}"
+               role="button">Wejdź</a>
+        </div>
+    </div>
+
+
+    <div class="card text-dark bg-warning mb-3" style="max-width: 15rem;">
+        <div class="card-header">Użytkownicy</div>
+        <div class="card-body">
+            <h5 class="card-title">Light card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+            <a class="btn btn-outline-dark" sec:authorize="isAuthenticated()" th:href="@{/administracja/uzytkownicy}"
+               role="button">Wejdź</a>
+        </div>
+    </div>
+
+    <div class="card text-dark bg-light mb-3" style="max-width: 15rem;">
+        <div class="card-header">Członkostwa</div>
+        <div class="card-body">
+            <h5 class="card-title">Light card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+            <a class="btn btn-outline-dark" sec:authorize="isAuthenticated()" th:href="@{/administracja/czlonkostwa}"
+               role="button">Wejdź</a>
+        </div>
+    </div>
+
+    <div class="card text-dark bg-warning mb-3" style="max-width: 15rem;">
+        <div class="card-header">Sekcje</div>
+        <div class="card-body">
+            <h5 class="card-title">Light card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+            <a class="btn btn-outline-dark" sec:authorize="isAuthenticated()" th:href="@{/administracja/sekcje}"
+               role="button">Wejdź</a>
+        </div>
+    </div>
+</div>
+</html>

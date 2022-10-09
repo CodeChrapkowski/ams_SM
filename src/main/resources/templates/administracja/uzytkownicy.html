@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="layout/head"></div>
+</head>
+
+<div th:replace="layout/menumoduly"></div>
+
+<h1>Administracja</h1><br>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/} ">Start</a></li>
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/administracja/administracja} ">Administracja</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Użytkownicy</li>
+    </ol>
+</nav>
+
+<h2>Użytkownicy</h2><br>
+
+<div>
+    <a class="btn btn-success" th:href="@{/ZobaczNoweTaryfyForm}" role="button">Dodaj</a>
+</div>
+
+<!--Filtrowanie tabeli-->
+
+<form th:href="@{/administracja/taryfy}" method="get">
+    <input id="txtSearch" type="text" name="keyword">
+    <button type="submit">Wyszukaj</button>
+</form>
+
+<h1>Płatności Lista użytkowników</h1>
+<br>
+
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01">Options</label>
+    </div>
+    <select class="custom-select" id="inputGroupSelect01">
+        <option value="NONE"> --Wybierz użytkownika--</option>
+        <option  th:each="uzytkownicy: ${listUzytkownicy}"
+                 th:value="${uzytkownicy.iduzytkownicy}"
+                 th:text="${uzytkownicy.imie}"/>
+    </select>
+</div>
+
+<br>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Imię</th>
+        <th scope="col">Nazwisko</th>
+        <th scope="col">Email</th>
+        <!--   <th scope="col">Data_dodania</th>-->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="uzytkownicy : ${listUzytkownicy}">
+        <td th:text="${uzytkownicy.iduzytkownicy}">ID</td>
+        <td th:text="${uzytkownicy.imie}">Imię</td>
+        <td th:text="${uzytkownicy.nazwisko}">Nazwisko</td>
+        <td th:text="${uzytkownicy.email}">Email</td>
+        <!--   <td th:text="${dates.format(uzytkownicy.data_dodania, 'dd-MM-yyyy')}">Data_dodania</td>-->
+        <!--    <td th:text="${uzytkownicy.data_dodania}">Data_dodania</td>-->
+
+    </tr>
+    </tbody>
+</table>
+
+
+</div>
+
+
+</html>

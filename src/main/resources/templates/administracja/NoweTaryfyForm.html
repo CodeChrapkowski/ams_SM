@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="layout/head"></div>
+</head>
+<body>
+
+<div th:replace="layout/menumoduly"></div>
+
+<h1>Administracja</h1><br>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/} ">Start</a></li>
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/administracja/administracja} ">Administracja</a>
+        </li>
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/administracja/taryfy} ">Taryfy</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Dodaj Taryfę</li>
+    </ol>
+</nav>
+
+<div class="adm-taryfy-form" align="center">
+
+
+    <h2>Dodaj Taryfę</h2><br>
+
+
+    <form action="#" th:action="@{/zapiszTaryfe}" th:object="${taryfy}" method="POST">
+        <input type="text" th:field="*{nazwa}" placeholder="Nazwa" class=" form-control mb-4 col-4">
+        <p th:if="${#fields.hasErrors('nazwa')}" th:errors="*{nazwa}"></p>
+
+        <input type="text" th:field="*{opis}" placeholder="Opis" class=" form-control mb-4 col-4">
+        <p th:if="${#fields.hasErrors('opis')}" th:errors="*{opis}"></p>
+
+        <button type="submit" class="btn btn-info col-2">Dodaj Taryfę</button>
+    </form>
+
+
+</div>
+</div>
+
+</body>
+</html>

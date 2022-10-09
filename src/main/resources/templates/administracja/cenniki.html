@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="layout/head"></div>
+</head>
+
+<div th:replace="layout/menumoduly"></div>
+
+<h1>Administracja</h1><br>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/} ">Start</a></li>
+        <li class="breadcrumb-item"><a sec:authorize="isAuthenticated()" th:href="@{/administracja/administracja} ">Administracja</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Cennik</li>
+    </ol>
+</nav>
+
+<h2>Cennik</h2><br>
+
+<div>
+    <a class="btn btn-success" th:href="@{/ZobaczNoweCennikiForm}" role="button">Dodaj</a>
+</div>
+
+
+<div>
+    <h1 align="center"> Lista cenników</h1>
+</div>
+
+<div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <!-- <th scope="col">Nazwa</th>-->
+            <th scope="col">
+                <a th:href="@{'/administracja/cenniki/page/' + ${currentPage} + '?sortField=nazwa&sortDirection=' + ${reverseSortDirection}}">Nazwa</a>
+
+            </th>
+            <th scope="col">
+                <a th:href="@{'/administracja/cenniki/page/' + ${currentPage} + '?sortField=opis&sortDirection=' + ${reverseSortDirection}}">Opis</a>
+            </th>
+            <th scope="col">
+                <a th:href="@{'/administracja/cenniki/page/' + ${currentPage} + '?sortField=cena&sortDirection=' + ${reverseSortDirection}}">Cena</a>
+            </th>
+            <th scope="col">Taryfa_IdTaryfa</th>
+            <th scope="col">
+                <a th:href="@{'/administracja/cenniki/page/' + ${currentPage} + '?sortField=taryfy.nazwa&sortDirection=' + ${reverseSortDirection}}">Taryfa nazwa</a>
+            </th>
+            <th scope="col">
+                <a th:href="@{'/administracja/cenniki/page/' + ${currentPage} + '?sortField=taryfy.opis&sortDirection=' + ${reverseSortDirection}}">Taryfa opis</a>
+            </th>
+            <th scope="col">Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cenniki : ${listaCennikow}">
+            <td th:text="${cenniki.idcennik}">ID</td>
+            <td th:text="${cenniki.nazwa}">Nazwa</td>
+            <td th:text="${cenniki.opis}">Opis</td>
+            <!--  <td th:text="${#numbers.formatCurrency(cenniki.cena)}">Cena<</td>-->
+            <td th:text="${#numbers.formatDecimal(cenniki.cena, 1, 'WHITESPACE', 2,'COMMA')}">Cena<</td>
+            <td th:text="${cenniki.taryfy_idtaryfa}">Taryfa_IdTaryfa</td>
+            <td th:text="${cenniki.taryfy.nazwa}">Taryfa_nazwa</td>
+            <td th:text="${cenniki.taryfy.opis}">Taryfa_opis</td>
+
+
+            <td><a th:href="@{/pokazFormCennikEdycja/{id}(id=${cenniki.idcennik})}"><i
+                    class="fas fa-edit"></i></a>
+                <a th:href="@{/usunCennik/{id}(id=${cenniki.idcennik})}"><i
+                        class="fas fa-trash-alt"></i></a></td>
+
+
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div th:if="${totalPages > 1}">
+        <div class="row col-sm-10">
+            <div class="col-sm-2">
+                Total Rows: [[${totalItems}]]
+            </div>
+            <div class="col-sm-2">
+                <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                    <a th:if="${currentPage != i}"
+                       th:href="@{'/administracja/cenniki/page/' + ${i} + '?sortField='+ ${sortField} + '&sortDirection=' + ${sortDirection}}">[[${i}]]</a>
+                    <span th:unless="${currentPage !=i}">[[${i}]]</span> &nbsp;&nbsp;
+                </span>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/administracja/cenniki/page/' +${currentPage + 1} + '?sortField='+ ${sortField} + '&sortDirection=' + ${sortDirection}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+            </div>
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}"
+                   th:href="@{'/administracja/cenniki/page/' +${totalPages} + '?sortField='+ ${sortField} + '&sortDirection=' + ${sortDirection}}">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</html>
